@@ -128,7 +128,7 @@ body {
 }
 
 .search-button:hover {
-    background-color: #004a8a;
+    background-color: var(--pr-green);
 }
 
 .search-button img {
