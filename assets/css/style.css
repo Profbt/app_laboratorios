@@ -187,6 +187,10 @@ body {
     color: var(--white);
 }
 
+.card a {
+    text-decoration: none;
+}
+
 
 .card-logo {
     width: 90px;
