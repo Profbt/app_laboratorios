@@ -7,6 +7,7 @@
     --gray-medium: #E0E0E0;
     --text-dark: #333333;
     --red-heart: #FF0000;
+    --yelow_vr: #f1c40f;
     --bg-light: linear-gradient(135deg, #003366 0%, #0055a5 100%);
 }
 
@@ -116,7 +117,7 @@ body {
 }
 
 .search-button {
-    background-color: var(--pr-blue);
+    background-color: var(--yelow_vr);
     border: none;
     padding: 0 1.2rem;
     cursor: pointer;
@@ -127,7 +128,7 @@ body {
 }
 
 .search-button:hover {
-    background-color: #004a8a;
+    background-color: #f1ed0f;
 }
 
 .search-button img {
