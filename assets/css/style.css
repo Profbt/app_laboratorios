@@ -39,7 +39,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    position:relative;
+    position: relative;
     z-index: 1;
 }
 
@@ -56,23 +56,24 @@ body {
 
 .logo-title-container {
     display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  text-align: center;
-  margin-bottom: 1rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
 .school-logo {
-    height: 100px; /* Tamanho padrão para desktop */
-  width: auto;
-  transition: transform 0.3s ease;
+    height: 100px;
+    /* Tamanho padrão para desktop */
+    width: auto;
+    transition: transform 0.3s ease;
 }
 
 .school-logo:hover {
     transform: scale(1.05);
-  }
+}
 
 .title {
     font-size: 2.5rem;
@@ -86,43 +87,52 @@ body {
     display: block;
     font-weight: 300;
     font-size: 0.8em;
-  }
+}
 
 .search-container {
-    margin-top: 15px;
-    width: 35%;
+    width: 50%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
 .search-form {
     display: flex;
-    border-radius: 10px;
+    width: 100%;
+    border-radius: 50px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: white;
 }
 
 .search-input {
     flex: 1;
-    padding: 10px 15px;
+    padding: 0.8rem 1.2rem;
     border: none;
     font-size: 1rem;
+    min-width: 0;
+    /* Corrige overflow no mobile */
 }
 
 .search-button {
-    background-color: #f1c40f;
+    background-color: var(--pr-blue);
     border: none;
-    padding: 10px 15px;
+    padding: 0 1.2rem;
     cursor: pointer;
-    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
 }
 
 .search-button:hover {
-    background-color: var(--pr-green);
+    background-color: #004a8a;
 }
 
 .main-content {
     flex: 1;
     padding: 2rem;
-    
+
 }
 
 .section-title {
@@ -131,7 +141,7 @@ body {
     color: rgba(0, 34, 62, 0.8);
     font-size: 2rem;
     font-weight: bold;
-    
+
 }
 
 .platforms-section {
@@ -174,7 +184,7 @@ body {
     width: 90px;
     height: 90px;
     object-fit: contain;
-    
+
 }
 
 .card-title {
@@ -186,7 +196,8 @@ body {
 
 
 .footer {
-    background-color: rgba(0, 34, 62, 0.8);;
+    background-color: rgba(0, 34, 62, 0.8);
+    ;
     color: var(--white);
     text-align: center;
     padding: 1rem;
@@ -198,76 +209,118 @@ body {
     font-size: 1.2em;
     animation: pulse 1.5s infinite;
     display: inline-block;
-  }
-  
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.3); }
-    100% { transform: scale(1); }
-  }
-  
-  /* Responsividade Otimizada */
-  @media (max-width: 768px) {
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Responsividade Otimizada */
+@media (max-width: 768px) {
+    .search-container {
+        padding: 0;
+    }
+
+    .search-input {
+        padding: 0.8rem 1.5rem;
+    }
+
+    .search-button {
+        padding: 0 1.5rem;
+    }
+
     .logo-title-container {
-      flex-direction: column;
-      gap: 0.3rem;
-      padding: 0 1rem;
+        flex-direction: column;
+        gap: 0.3rem;
+        padding: 0 1rem;
     }
-  
+
     .school-logo {
-      height: 70px; /* Tamanho reduzido para tablet */
+        height: 70px;
+        /* Tamanho reduzido para tablet */
     }
-  
+
     .title {
-      font-size: 1.8rem;
+        font-size: 1.8rem;
     }
-  
+
     .cards-grid {
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 1rem;
-      padding: 0 0.5rem;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1rem;
+        padding: 0 0.5rem;
     }
-  }
-  
-  @media (max-width: 480px) {
+}
+
+@media (max-width: 480px) {
     .header {
-      padding: 1rem 0.5rem;
+        padding: 1rem 0.5rem;
     }
-  
+
     .logo-title-container {
-      margin-bottom: 0.5rem;
+        margin-bottom: 0.5rem;
     }
-  
+
     .school-logo {
-      height: 60px; /* Tamanho para mobile */
+        height: 60px;
+        /* Tamanho para mobile */
     }
-  
+
     .title {
-      font-size: 1.5rem;
+        font-size: 1.5rem;
     }
-  
+
     .title span {
-      font-size: 0.7em;
+        font-size: 0.7em;
     }
-  
-    .cards-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 0.8rem;
-    }
-  
+
     .search-form {
-      max-width: 95%;
-      margin: 0 auto;
+        border-radius: 25px;
     }
-  }
-  
-  /* Ajuste extra para telas muito pequenas */
-  @media (max-width: 360px) {
+
+    .search-input {
+        padding: 0.9rem 1.2rem;
+        font-size: 1rem;
+    }
+
+    .search-button {
+        min-width: 50px;
+        /* Garante espaço adequado */
+        padding: 0 1rem;
+    }
+
+    .search-button img {
+        width: 18px;
+        height: 18px;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.8rem;
+    }
+
+    .search-form {
+        max-width: 95%;
+        margin: 0 auto;
+    }
+}
+
+/* Ajuste extra para telas muito pequenas */
+@media (max-width: 360px) {
     .title {
-      font-size: 1.3rem;
+        font-size: 1.3rem;
     }
-    
+
     .school-logo {
-      height: 50px;
+        height: 50px;
     }
-  }
+}
