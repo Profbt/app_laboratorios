@@ -118,7 +118,7 @@ body {
 
 .search-button {
     background-color: var(--yelow_vr);
-    color: black;
+    color: var(--text-dark);
     border: none;
     padding: 0 1.2rem;
     cursor: pointer;
@@ -130,6 +130,7 @@ body {
 
 .search-button:hover {
     background-color: var(--pr-green);
+    color: var(--white);
 }
 
 .search-button img {
