@@ -128,7 +128,7 @@ body {
 
 .search-button:hover {
     background-color: var(--pr-green);
-   
+
 }
 
 .search-button img {
@@ -187,11 +187,6 @@ body {
     color: var(--white);
 }
 
-.card a {
-    text-decoration: none;
-}
-
-
 .card-logo {
     width: 90px;
     height: 90px;
@@ -209,11 +204,36 @@ body {
 
 .footer {
     background-color: rgba(0, 34, 62, 0.8);
-    ;
     color: var(--white);
     text-align: center;
     padding: 1rem;
     margin-top: 0.5rem;
+}
+
+/* LINKS NO FOOTER */
+.footer a {
+    text-decoration: none;
+    /* Remove sublinhado */
+    transition: color 0.3s ease;
+    font-weight: bold;
+    /* Negrito */
+    color: var(--white);
+    /* Ou outra cor do seu tema */
+    opacity: 0.9;
+}
+
+.footer a:hover {
+    color: var(--white);
+    /* Cor ao passar o mouse (opcional) */
+    text-decoration: underline;
+    /* Sublinhado apenas no hover (opcional) */
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* Remove o sublinhado extra do elemento <u> */
+.footer a u {
+    text-decoration: none;
 }
 
 .heart {
