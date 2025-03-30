@@ -124,6 +124,7 @@ body {
     align-items: center;
     justify-content: center;
     transition: background 0.3s ease;
+    outline: #f1c40f;
 }
 
 .search-button:hover {
