@@ -90,42 +90,47 @@ body {
     font-size: 0.8em;
 }
 
+/* BARRA DE BUSCA - ESTILOS GERAIS */
 .search-container {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
     padding: 0 1rem;
-}
-
-.search-form {
+  }
+  
+  .search-form {
     display: flex;
     width: 100%;
     border-radius: 50px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     background: white;
-}
-
-.search-input {
+    border: 1px solid #ddd; /* Borda sutil para melhor definição */
+  }
+  
+  .search-input {
     flex: 1;
     padding: 0.8rem 1.2rem;
     border: none;
     font-size: 1rem;
     min-width: 0;
     outline: none;
-    /* Corrige overflow no mobile */
-}
-
-.search-button {
-    background-color: var(--yelow_vr);
-    padding: 0 1.2rem;
+    height: 44px; /* Altura fixa para alinhamento */
+  }
+  
+  /* BOTÃO DE BUSCA - ESTILO PADRÃO */
+  .search-button {
+    background-color: var(--pr-blue);
+    border: none;
+    padding: 0 1.5rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.3s ease;
-    outline: #f1c40f;
-}
+    transition: all 0.3s ease;
+    height: 44px; /* Mesma altura do input */
+    border-left: 1px solid rgba(255,255,255,0.2); /* Divisor sutil */
+  }
 
 .search-button:hover {
     background-color: var(--pr-green);
@@ -135,8 +140,8 @@ body {
 .search-button img {
     width: 20px;
     height: 20px;
-    filter: brightness(0) invert(1);
-}
+    filter: brightness(0) invert(1); /* Ícone branco */
+  }
 
 .main-content {
     flex: 1;
@@ -258,123 +263,206 @@ body {
     }
 }
 
-/* Responsividade Otimizada */
-@media (max-width: 768px) {
+/* =========== DESKTOP STYLES (min-width: 769px) =========== */
+@media (min-width: 769px) {
+    /* ----- BARRA DE BUSCA ----- */
     .search-container {
-        width: 80%;
-        padding: 0;
+      width: 80%;
+      max-width: 600px;
+      padding: 0;
     }
-
+  
+    .search-form {
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+  
     .search-input {
-        padding: 0.9rem 1.2rem;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
     }
-
+  
     .search-button {
-        padding: 0 1rem;
-        background-color: transparent;
-        min-width: 50px;
+      padding: 0 1.5rem;
+      background-color: var(--pr-blue);
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
     }
-
-    .search-button img {
-        width: 18px;
-        height: 18px;
-        filter: brightness(0.5);
-    }
-
+  
     .search-button:hover {
-        background-color: var(--pr-blue-light);
+      background-color: #004a8a;
     }
-
-    .search-button:hover img {
-        filter: brightness(0);
-    }
-
-    .search-form {
-        border-radius: 25px;
-    }
-
-    .logo-title-container {
-        flex-direction: column;
-        gap: 0.3rem;
-        padding: 0 1rem;
-    }
-
-    .school-logo {
-        height: 70px;
-        /* Tamanho reduzido para tablet */
-    }
-
-    .title {
-        font-size: 1.8rem;
-    }
-
-    .cards-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 1rem;
-        padding: 0 0.5rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .header {
-        padding: 1rem 0.5rem;
-    }
-
-    .logo-title-container {
-        margin-bottom: 0.5rem;
-    }
-
-    .school-logo {
-        height: 60px;
-        /* Tamanho para mobile */
-    }
-
-    .title {
-        font-size: 1.5rem;
-    }
-
-    .title span {
-        font-size: 0.7em;
-    }
-
-    .search-form {
-        border-radius: 25px;
-    }
-
-    .search-input {
-        padding: 0.9rem 1.2rem;
-        font-size: 1rem;
-    }
-
-    .search-button {
-        min-width: 50px;
-        /* Garante espaço adequado */
-        padding: 0 1rem;
-    }
-
+  
     .search-button img {
-        width: 18px;
-        height: 18px;
+      width: 18px;
+      height: 18px;
     }
-
-    .cards-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 0.8rem;
+  
+    /* ----- HEADER (Logo + Título) ----- */
+    .logo-title-container {
+      flex-direction: row;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
     }
-
-    .search-form {
-        max-width: 95%;
-        margin: 0 auto;
-    }
-}
-
-/* Ajuste extra para telas muito pequenas */
-@media (max-width: 360px) {
-    .title {
-        font-size: 1.3rem;
-    }
-
+  
     .school-logo {
-        height: 50px;
+      height: 100px;
     }
-}
+  
+    .title {
+      font-size: 2.5rem;
+    }
+  
+    /* ----- CARDS ----- */
+    .cards-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      padding: 0;
+    }
+  
+    .card {
+      padding: 1.5rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+  
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 92, 169, 0.15);
+    }
+  
+    /* ----- FOOTER ----- */
+    .footer {
+      padding: 1.5rem;
+    }
+  
+    .footer a {
+      color: var(--white);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+  
+    .footer a:hover {
+      border-bottom: 1px solid var(--white);
+    }
+  }
+
+  
+
+/* =========== MOBILE STYLES =========== */
+
+/* ----------- TABLET (max-width: 768px) ----------- */
+@media (max-width: 768px) {
+    /* ----- GERAL ----- */
+    .container {
+      padding: 0 1rem;
+    }
+  
+    /* ----- HEADER ----- */
+    .logo-title-container {
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: center;
+    }
+  
+    .school-logo {
+      height: 80px;
+    }
+  
+    .title {
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+  
+    /* ----- BARRA DE BUSCA ----- */
+    .search-container {
+      width: 100%;
+      padding: 0 0.5rem;
+    }
+  
+    .search-form {
+      border-radius: 25px;
+    }
+  
+    .search-input {
+      padding: 0.9rem 1.2rem;
+      height: 48px;
+    }
+  
+    .search-button {
+      min-width: 55px;
+      height: 48px;
+    }
+  
+    /* ----- CARDS ----- */
+    .cards-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+      padding: 0 0.5rem;
+    }
+  
+    .card {
+      padding: 1.2rem 0.8rem;
+    }
+  }
+  
+  /* ----------- CELULAR (max-width: 480px) ----------- */
+  @media (max-width: 480px) {
+    /* ----- HEADER ----- */
+    .header {
+      padding: 1rem 0;
+    }
+  
+    .school-logo {
+      height: 70px;
+    }
+  
+    .title {
+      font-size: 1.7rem;
+    }
+  
+    /* ----- BARRA DE BUSCA ----- */
+    .search-input {
+      padding: 0.8rem 1rem;
+      font-size: 0.95rem;
+    }
+  
+    .search-button {
+      min-width: 50px;
+      padding: 0 0.8rem;
+    }
+  
+    /* ----- CARDS ----- */
+    .cards-grid {
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 0.8rem;
+    }
+  
+    .card-title {
+      font-size: 0.95rem;
+    }
+  
+    /* ----- FOOTER ----- */
+    .footer {
+      padding: 1rem;
+    }
+  
+    .footer p {
+      font-size: 0.9rem;
+    }
+  }
+  
+  /* ----------- CELULAR PEQUENO (max-width: 360px) ----------- */
+  @media (max-width: 360px) {
+    .title {
+      font-size: 1.5rem;
+    }
+  
+    .cards-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  
+    .card-logo {
+      width: 60px;
+      height: 60px;
+    }
+  }
