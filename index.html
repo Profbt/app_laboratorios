@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#005CA9">
+    <title>Portal do Aluno Vicente Rijo</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="icon" href="/assets/images/icons/icon-192x192.png">
+</head>
+
+<body>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo-title-container">
+                <img src="/assets/images/logos/logo.png" alt="Logo Colégio Vicente Rijo" class="school-logo">
+                <h1 class="title">Portal do Aluno <span>Vicente Rijo</span></h1>
+            </div>
+
+            <div class="search-container">
+                <form action="https://www.google.com/search" method="get" target="_blank" class="search-form">
+                    <input type="search" name="q" placeholder="Buscar no Google..." aria-label="Busca Google"
+                        class="search-input">
+                    <button type="submit" class="search-button">
+                        <img src="/assets/images/icons/search.png" alt="Ícone de busca" width="20">
+                    </button>
+                </form>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="platforms-section">
+                <h2 class="section-title">Plataformas Educacionais</h2>
+
+                <div class="cards-grid">
+                    <!-- Google Services -->
+                    <div class="card" data-platform="Google Classroom" onclick="trackLinkClick(this)">
+                        <img src="/assets/images/logos/classroom.png" alt="Google Classroom" class="card-logo">
+                        <h3 class="card-title">Google Classroom</h3>
+                        <a href="https://accounts.google.com/ServiceLogin?continue=https%3A%2F%2Fclassroom.google.com&passive=true"
+                            target="_blank" class="card-link" aria-hidden="true"></a>
+                    </div>
+
+                    <!-- Redação PR -->
+                    <div class="card" data-platform="Redação PR" onclick="trackLinkClick(this)">
+                        <img src="/assets/images/logos/redacao.png" alt="Redação PR" class="card-logo">
+                        <h3 class="card-title">Redação PR</h3>
+                        <a href="https://redacao.pr.gov.br/login" target="_blank" class="card-link"
+                            aria-hidden="true"></a>
+                    </div>
+
+                    <!-- Leia Paraná -->
+                    <div class="card" data-platform="Leia Paraná" onclick="trackLinkClick(this)">
+                        <img src="/assets/images/logos/leia.png" alt="Leia Paraná" class="card-logo">
+                        <h3 class="card-title">Leia Paraná</h3>
+                        <a href="https://leiaparana.odilo.us/" target="_blank" class="card-link" aria-hidden="true"></a>
+                    </div>
+
+                    <!-- Matific -->
+                    <div class="card" data-platform="Matific" onclick="trackLinkClick(this)">
+                        <img src="/assets/images/logos/matific.png" alt="Matific" class="card-logo">
+                        <h3 class="card-title">Matific</h3>
+                        <a href="https://www.matific.com/bra/pt-br/login-page/" target="_blank" class="card-link"
+                            aria-hidden="true"></a>
+                    </div>
+
+                    <!-- Khan Academy -->
+                    <div class="card" data-platform="Khan Academy" onclick="trackLinkClick(this)">
+                        <img src="/assets/images/logos/khanacademy.png" alt="Khan Academy" class="card-logo">
+                        <h3 class="card-title">Khan Academy</h3>
+                        <a href="https://pt.khanacademy.org/login" target="_blank" class="card-link"
+                            aria-hidden="true"></a>
+                    </div>
+
+                    <!-- Quizizz -->
+                    <div class="card" data-platform="Quizizz" onclick="trackLinkClick(this)">
+                        <img src="/assets/images/logos/quizizz.png" alt="Quizizz" class="card-logo">
+                        <h3 class="card-title">Quizizz</h3>
+                        <a href="https://quizizz.com/login?source=top_nav_login_button&ctaSource=top_nav_login_button&ref=header_tab&webflow_referrer=webflow&lng=pt-BR&fromPage=/"
+                            target="_blank" class="card-link" aria-hidden="true"></a>
+                    </div>
+
+                    <!-- Inglês Paraná Teens -->
+                    <div class="card" data-platform="English Central" onclick="trackLinkClick(this)">
+                        <img src="/assets/images/logos/inglesparanateens.png" alt="English Central" class="card-logo">
+                        <h3 class="card-title">Inglês Paraná Teens</h3>
+                        <a href="https://pt.englishcentral.com/partner/parana" target="_blank" class="card-link"
+                            aria-hidden="true"></a>
+                    </div>
+
+                    <!-- Inglês Paraná high -->
+                    <div class="card" data-platform="English Central" onclick="trackLinkClick(this)">
+                        <img src="/assets/images/logos/inglesparanahigh.png" alt="English Central" class="card-logo">
+                        <h3 class="card-title">Inglês Paraná High</h3>
+                        <a href="http://inglesparana.learn.corporate.ef.com/" target="_blank" class="card-link"
+                            aria-hidden="true"></a>
+                    </div>
+
+                    <!-- EduTech -->
+                    <div class="card" data-platform="Alura" onclick="trackLinkClick(this)">
+                        <img src="/assets/images/logos/alura.png" alt="Alura EduTech" class="card-logo">
+                        <h3 class="card-title">Alura EduTech</h3>
+                        <a href="https://cursos.alura.com.br/edutech" target="_blank" class="card-link"
+                            aria-hidden="true"></a>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>Desenvolvido com <span class="heart">♥</span> por Prof. Bruno Carvalho. 2025</p>
+        </footer>
+    </div>
+
+    <script src="/assets/js/app.js" defer></script>
+</body>
+
+</html>

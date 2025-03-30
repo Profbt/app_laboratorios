@@ -1,0 +1,21 @@
+{
+    "name": "Portal do Aluno Vicente Rijo",
+    "short_name": "Vicente Rijo",
+    "start_url": "/?utm_source=pwa",
+    "display": "standalone",
+    "background_color": "#FFFFFF",
+    "theme_color": "#005CA9",
+    "description": "Portal educacional do Colégio Vicente Rijo",
+    "icons": [
+      {
+        "src": "/assets/images/icons/icon-192x192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/assets/images/icons/icon-512x512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ]
+  }
