@@ -1,7 +1,7 @@
 // Cache do Service Worker muda versão para atualizar o app.
-const CACHE_NAME = 'portal-vicente-rijo-v6';
-const STATIC_CACHE = 'static-v6';
-const DYNAMIC_CACHE = 'dynamic-v6';
+const CACHE_NAME = 'portal-vicente-rijo-v7';
+const STATIC_CACHE = 'static-v7';
+const DYNAMIC_CACHE = 'dynamic-v7';
 
 // Arquivos que devem ser cacheados imediatamente
 const STATIC_ASSETS = [
