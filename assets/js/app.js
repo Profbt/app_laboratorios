@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // ====================== INICIALIZAÇÃO ======================
     initParallax();
     setupCards();
-    setupSearch();
     registerServiceWorker();
     checkNetworkStatus();
   
@@ -16,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     preloadImages([
       '/assets/images/logos/logo.png',
       '/assets/images/logos/paralax.webp',
-      '/assets/images/icons/search.png'
+      '/assets/images/icons/search.svg'
     ]);
   });
   
@@ -58,30 +57,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.card');
     
     cards.forEach(card => {
+      // Evento de clique
       card.addEventListener('click', function() {
-        const platform = this.dataset.platform;
-        const link = this.querySelector('.card-link');
+        trackLinkClick(this.dataset.platform);
         
-        // Adiciona efeito de clique
-        this.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-          this.style.transform = '';
-          if (link) {
-            window.open(link.href, '_blank', 'noopener,noreferrer');
-          }
-        }, 150);
-
-        // Tracking
-        trackLinkClick(platform);
+        // Redirecionamento seguro
+        const link = this.querySelector('.card-link');
+        if (link) {
+          window.open(link.href, '_blank', 'noopener,noreferrer');
+        }
       });
   
-      // Efeitos touch para mobile
+      // Efeito hover via JS (fallback para mobile)
       card.addEventListener('touchstart', function() {
-        this.style.transform = 'scale(0.98)';
+        this.classList.add('card-hover');
       });
       
       card.addEventListener('touchend', function() {
-        this.style.transform = '';
+        this.classList.remove('card-hover');
       });
     });
   }
@@ -215,52 +208,4 @@ document.addEventListener('DOMContentLoaded', () => {
           break;
       }
     };
-  }
-
-  // Nova função de busca
-  function setupSearch() {
-    const searchInput = document.querySelector('.search-input');
-    const searchButton = document.querySelector('.search-button');
-    const cards = document.querySelectorAll('.card');
-    
-    // Previne o envio do formulário
-    document.querySelector('.search-form').addEventListener('submit', (e) => {
-        e.preventDefault();
-    });
-
-    // Função de filtro
-    const filterCards = (searchTerm) => {
-        searchTerm = searchTerm.toLowerCase().trim();
-        
-        cards.forEach(card => {
-            const title = card.querySelector('.card-title').textContent.toLowerCase();
-            const shouldShow = searchTerm === '' || title.includes(searchTerm);
-            
-            // Adiciona/remove classe para animação
-            if (shouldShow) {
-                card.style.display = 'block';
-                setTimeout(() => card.style.opacity = '1', 10);
-            } else {
-                card.style.opacity = '0';
-                setTimeout(() => card.style.display = 'none', 300);
-            }
-        });
-    };
-
-    // Evento de input para busca em tempo real
-    searchInput.addEventListener('input', (e) => {
-        filterCards(e.target.value);
-    });
-
-    // Evento de clique no botão de busca
-    searchButton.addEventListener('click', () => {
-        filterCards(searchInput.value);
-    });
-
-    // Limpa a busca quando o campo está vazio
-    searchInput.addEventListener('blur', () => {
-        if (searchInput.value === '') {
-            filterCards('');
-        }
-    });
   }

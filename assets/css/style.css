@@ -7,8 +7,7 @@
     --gray-medium: #E0E0E0;
     --text-dark: #333333;
     --red-heart: #FF0000;
-    --bg-gradient: linear-gradient(135deg, #003366 0%, #0055a5 100%);
-    --card-gradient: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(190, 190, 193, 0.9));
+    --bg-light: linear-gradient(135deg, #003366 0%, #0055a5 100%);
 }
 
 * {
@@ -40,34 +39,32 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    position: relative;
+    position:relative;
     z-index: 1;
 }
 
 .header {
-    background: var(--bg-gradient);
-    padding: 20px;
-    border-radius: 0 0 20px 20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 20px;
+    background: rgba(0, 34, 62, 0.8);
     color: var(--white);
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .logo-title-container {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 10px 20px;
-    width: 100%;
+    justify-content: space-between; /* Distribui o título à esquerda e a logo à direita */
+    padding: 10px 20px; /* Reduz a altura do topo */
 }
 
 .school-logo {
-    height: 80px;
+    height:80px; /* Reduza o tamanho da logo se necessário */
     width: auto;
     margin-right: 20px;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .title {
@@ -77,75 +74,53 @@ body {
 }
 
 .search-container {
-    margin-top: 20px;
-    width: 50%;
-    max-width: 600px;
+    margin-top: 15px;
+    width: 35%;
 }
 
 .search-form {
     display: flex;
-    border-radius: 25px;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    background: var(--white);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.search-form:focus-within {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .search-input {
     flex: 1;
-    padding: 15px 20px;
+    padding: 10px 15px;
     border: none;
-    font-size: 1.1rem;
-    background: transparent;
-}
-
-.search-input:focus {
-    outline: none;
+    font-size: 1rem;
 }
 
 .search-button {
-    background: var(--bg-gradient);
+    background-color: #f1c40f;
     border: none;
-    padding: 15px 25px;
+    padding: 10px 15px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background 0.3s;
 }
 
 .search-button:hover {
-    opacity: 0.9;
-    transform: scale(1.05);
+    background-color: var(--pr-green);
 }
 
 .main-content {
     flex: 1;
     padding: 2rem;
+    
 }
 
 .section-title {
     text-align: center;
-    margin-bottom: 2rem;
-    color: var(--text-dark);
-    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    color: rgba(0, 34, 62, 0.8);
+    font-size: 2rem;
     font-weight: bold;
-    position: relative;
-    padding-bottom: 1rem;
+    
 }
 
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 3px;
-    background: var(--bg-gradient);
-    border-radius: 2px;
+.platforms-section {
+    background-color: bl;
 }
 
 .cards-grid {
@@ -156,62 +131,57 @@ body {
 }
 
 .card {
-    background: var(--card-gradient);
-    border-radius: 15px;
-    padding: 2rem 1.5rem;
+    background: rgba(190, 190, 193, 0.9);
+    border-radius: 10px;
+    padding: 1.5rem 1rem;
     text-align: center;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
     cursor: pointer;
+    position: relative;
 }
 
 .card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 30px rgba(0, 92, 169, 0.2);
-    background: var(--bg-gradient);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 92, 169, 0.3);
+    background: rgba(0, 34, 62, 0.8);
+    color: var(--white);
 }
+
+.card:hover h3,
+.card:hover p {
+    color: var(--white);
+}
+
 
 .card-logo {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     object-fit: contain;
-    transition: transform 0.3s ease;
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
-}
-
-.card:hover .card-logo {
-    transform: scale(1.1);
-    filter: brightness(1.2);
+    
 }
 
 .card-title {
-    margin-top: 1rem;
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--text-dark);
-    transition: color 0.3s ease;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: rgba(0, 34, 62, 0.8);
 }
 
-.card:hover .card-title {
-    color: var(--white);
-}
+
 
 .footer {
-    background: var(--bg-gradient);
+    background-color: rgba(0, 34, 62, 0.8);;
     color: var(--white);
     text-align: center;
     padding: 1rem;
-    margin-top: 2rem;
+    margin-top: 0.5rem;
 }
 
 .heart {
     color: var(--red-heart);
     font-size: 1.2em;
     animation: pulse 1.5s infinite;
-    display: inline-block;
 }
 
 @keyframes pulse {
@@ -222,40 +192,26 @@ body {
 
 /* Responsividade */
 @media (max-width: 768px) {
-    .search-container {
-        width: 80%;
-    }
-    
     .cards-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
 
     .title {
         font-size: 2rem;
     }
-
     .school-logo {
-        height: 60px;
+        height:80px; /* Reduza o tamanho da logo se necessário */
+        width: auto;
+        
     }
 }
 
 @media (max-width: 480px) {
     .cards-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 0.8rem;
     }
 
     .search-input {
-        padding: 12px 15px;
-    }
-
-    .card {
-        padding: 1.5rem 1rem;
-    }
-
-    .card-logo {
-        width: 80px;
-        height: 80px;
+        padding: 0.5rem 1rem;
     }
 }
