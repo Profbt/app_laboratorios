@@ -1,0 +1,161 @@
+/* Estilos de acessibilidade */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Foco visível */
+:focus {
+    outline: 3px solid var(--pr-blue);
+    outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+:focus-visible {
+    outline: 3px solid var(--pr-blue);
+    outline-offset: 2px;
+}
+
+/* Melhorias de contraste */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Melhorias de texto */
+.card-title {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.4;
+    color: inherit;
+}
+
+/* Melhorias de interação */
+.card:focus-within {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 92, 169, 0.3);
+    background: var(--bg-light);
+    color: var(--white);
+}
+
+.card:focus-within .card-title {
+    color: var(--white);
+}
+
+/* Melhorias de navegação por teclado */
+.card {
+    position: relative;
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid transparent;
+    border-radius: 15px;
+    transition: border-color 0.3s ease;
+    pointer-events: none;
+}
+
+.card:focus::after {
+    border-color: var(--pr-blue);
+}
+
+/* Melhorias de leitura */
+@media (prefers-reduced-motion: no-preference) {
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    }
+}
+
+/* Melhorias de contraste para modo escuro */
+@media (prefers-color-scheme: dark) {
+    .card {
+        background: var(--card-bg);
+        color: var(--text-dark);
+    }
+
+    .card:focus-within {
+        background: var(--bg-light);
+        color: var(--white);
+    }
+
+    .search-input {
+        color: var(--text-dark);
+    }
+
+    .search-input::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+    }
+}
+
+/* Estilos para a splash screen */
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.splash-screen-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-width: 80%;
+    text-align: center;
+}
+
+.splash-screen-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.splash-screen-message {
+    margin-bottom: 20px;
+}
+
+.splash-screen-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.splash-screen-button {
+    margin: 0 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.splash-screen-confirm {
+    background: var(--pr-blue);
+    color: #fff;
+}
+
+.splash-screen-close {
+    background: #ccc;
+    color: #333;
+}

@@ -4,208 +4,208 @@
  * @version 2.0 (2025)
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-    // ====================== INICIALIZAÇÃO ======================
-    initParallax();
-    setupCards();
-    registerServiceWorker();
-    checkNetworkStatus();
-  
-    // Pré-carrega imagens críticas
-    preloadImages([
-      '/assets/images/logos/logo.png',
-      '/assets/images/logos/paralax.webp',
-      '/assets/images/icons/search.svg'
-    ]);
-  });
-  
-  // ====================== FUNÇÕES PRINCIPAIS ======================
-  
-  /**
-   * Inicializa o efeito parallax com fallback
-   */
-  function initParallax() {
-    try {
-      // Verifica se já existe um elemento parallax
-      if (document.querySelector('.parallax-bg')) return;
-  
-      // Cria div parallax
-      const parallaxDiv = document.createElement('div');
-      parallaxDiv.className = 'parallax-bg';
-      
-      // Insere no DOM
-      document.head.appendChild(style);
-      document.body.insertBefore(parallaxDiv, document.body.firstChild);
-  
-      // Efeito de movimento no scroll
-      window.addEventListener('scroll', () => {
-        const yOffset = window.pageYOffset;
-        parallaxDiv.style.transform = `translateY(${yOffset * 0.3}px)`;
-      });
-  
-    } catch (error) {
-      console.error('Erro no parallax:', error);
-      // Fallback simples
-      document.body.style.backgroundImage = 'url(/assets/images/logos/paralax.webp)';
-    }
-  }
-  
-  /**
-   * Configura os cards interativos
-   */
-  function setupCards() {
-    const cards = document.querySelectorAll('.card');
-    
-    cards.forEach(card => {
-      // Evento de clique
-      card.addEventListener('click', function() {
-        trackLinkClick(this.dataset.platform);
-        
-        // Redirecionamento seguro
-        const link = this.querySelector('.card-link');
-        if (link) {
-          window.open(link.href, '_blank', 'noopener,noreferrer');
+// Inicialização da aplicação
+// Não há mais parallax nem service worker
+
+let deferredPrompt;
+
+// Função para inicializar o tema ao carregar a página
+function initializeTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+    setTheme(initialTheme, false); // Não salvar no localStorage na inicialização
+}
+
+function updateInstallButtonVisibility() {
+    const installButton = document.getElementById('install-button');
+    if (installButton) {
+        // Verifica se está em modo standalone (PWA instalado)
+        const isInStandaloneMode = (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone);
+
+        if (window.innerWidth <= 768 && !isInStandaloneMode) {
+            installButton.style.display = 'inline-block'; // Exibe o botão se for mobile E NÃO estiver em standalone
+        } else {
+            installButton.style.display = 'none'; // Oculta o botão caso contrário
         }
-      });
-  
-      // Efeito hover via JS (fallback para mobile)
-      card.addEventListener('touchstart', function() {
-        this.classList.add('card-hover');
-      });
-      
-      card.addEventListener('touchend', function() {
-        this.classList.remove('card-hover');
-      });
+    }
+}
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    updateInstallButtonVisibility();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    setupCards();
+
+    const btn = document.getElementById('toggle-theme');
+    if (btn) {
+        btn.addEventListener('click', toggleTheme);
+    }
+
+    updateNetworkStatusIndicator();
+
+    const installButton = document.getElementById('install-button');
+    if (installButton) {
+        installButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                deferredPrompt = null;
+                installButton.style.display = 'none';
+            } else {
+                installButton.style.display = 'none';
+            }
+        });
+    }
+    updateInstallButtonVisibility();
+    initializeTheme(); // Chamada para inicializar o tema quando o DOM estiver pronto
+});
+
+window.addEventListener('resize', () => {
+    updateInstallButtonVisibility();
+    updateNetworkStatusIndicator();
+});
+
+function setupCards() {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.style.transition = 'all 0.3s ease';
+        card.style.transform = 'translateY(0)';
+        card.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+        
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-5px)';
+            card.style.boxShadow = '0 10px 20px rgba(0,0,0,0.2)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0)';
+            card.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+        });
+
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const link = card.querySelector('a');
+                if (link) link.click();
+            }
+        });
     });
-  }
-  
-  /**
-   * Registra o Service Worker
-   */
-  function registerServiceWorker() {
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
-          .then(registration => {
-            console.log('SW registrado:', registration.scope);
-          })
-          .catch(error => {
-            console.log('Falha no SW:', error);
-          });
-      });
+}
+
+function setTheme(theme, save = true) {
+    document.documentElement.setAttribute('data-theme', theme);
+    if (save) {
+        localStorage.setItem('theme', theme);
     }
-  }
-  
-  // ====================== FUNÇÕES UTILITÁRIAS ======================
-  
-  /**
-   * Trackeia cliques nos links
-   * @param {string} platform - Nome da plataforma acessada
-   */
-  function trackLinkClick(platform) {
-    const analyticsData = {
-      event: 'platform_access',
-      platform: platform,
-      timestamp: new Date().toISOString(),
-      userAgent: navigator.userAgent
+    const btn = document.getElementById('toggle-theme');
+    if (btn) {
+        btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+}
+
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+}
+
+function updateNetworkStatusIndicator() {
+    const indicator = document.getElementById('network-status-indicator');
+    if (indicator) {
+        if (window.innerWidth <= 768) {
+            indicator.style.display = 'none';
+            return;
+        }
+
+        indicator.style.display = 'flex';
+        if (navigator.onLine) {
+            indicator.classList.add('network-status-online');
+            indicator.classList.remove('network-status-offline');
+            indicator.textContent = 'Online';
+            indicator.setAttribute('aria-label', 'Status da rede: Online');
+        } else {
+            indicator.classList.add('network-status-offline');
+            indicator.classList.remove('network-status-online');
+            indicator.textContent = 'Offline';
+            indicator.setAttribute('aria-label', 'Status da rede: Offline');
+        }
+    }
+}
+
+window.addEventListener('online', updateNetworkStatusIndicator);
+window.addEventListener('offline', updateNetworkStatusIndicator);
+
+// Função para exibir um prompt de atualização ao usuário
+function promptForUpdate(registration) {
+    const updateModal = document.getElementById('update-modal-overlay');
+    const updateNowButton = document.getElementById('update-now-button');
+    const updateLaterButton = document.getElementById('update-later-button');
+
+    if (!updateModal || !updateNowButton || !updateLaterButton) {
+        console.error('Elementos do modal de atualização não encontrados.');
+        // Fallback para o confirm simples se os elementos não forem encontrados
+        const updateConfirmed = confirm('Uma nova versão do Portal do Aluno está disponível! Deseja atualizar agora?');
+        if (updateConfirmed) {
+            if (registration.waiting) {
+                registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+            }
+            window.location.reload();
+        }
+        return;
+    }
+
+    updateModal.classList.add('active');
+
+    const handleUpdateNow = () => {
+        if (registration.waiting) {
+            registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+        }
+        window.location.reload();
+        removeListeners();
     };
-  
-    // Salva no localStorage
-    saveToLocalStorage(analyticsData);
-    
-    // Envia para analytics (simulado)
-    if (navigator.onLine) {
-      sendToAnalytics(analyticsData);
-    }
-  }
-  
-  /**
-   * Pré-carrega imagens
-   * @param {string[]} imageUrls - Array de URLs de imagens
-   */
-  function preloadImages(imageUrls) {
-    imageUrls.forEach(url => {
-      const img = new Image();
-      img.src = url;
-    });
-  }
-  
-  /**
-   * Monitora status da rede
-   */
-  function checkNetworkStatus() {
-    const updateNetworkStatus = () => {
-      const statusElement = document.getElementById('network-status') || createNetworkStatusElement();
-      statusElement.textContent = navigator.onLine ? 'Online' : 'Offline';
-      statusElement.style.backgroundColor = navigator.onLine ? '#3D8B37' : '#E74C3C';
+
+    const handleUpdateLater = () => {
+        updateModal.classList.remove('active');
+        removeListeners();
     };
-  
-    window.addEventListener('online', updateNetworkStatus);
-    window.addEventListener('offline', updateNetworkStatus);
-    updateNetworkStatus();
-  }
-  
-  function createNetworkStatusElement() {
-    const statusElement = document.createElement('div');
-    statusElement.id = 'network-status';
-    statusElement.style.position = 'fixed';
-    statusElement.style.bottom = '10px';
-    statusElement.style.right = '10px';
-    statusElement.style.padding = '5px 10px';
-    statusElement.style.borderRadius = '3px';
-    statusElement.style.color = 'white';
-    statusElement.style.zIndex = '1000';
-    document.body.appendChild(statusElement);
-    return statusElement;
-  }
-  
-  // ====================== FUNÇÕES DE APOIO ======================
-  
-  function saveToLocalStorage(data) {
-    try {
-      const logs = JSON.parse(localStorage.getItem('accessLogs') || []);
-      logs.push(data);
-      localStorage.setItem('accessLogs', JSON.stringify(logs.slice(-100))); // Mantém apenas os 100 últimos
-    } catch (e) {
-      console.error('Erro ao salvar no localStorage:', e);
-    }
-  }
-  
-  function sendToAnalytics(data) {
-    // Simulação de envio para Google Analytics
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'platform_access', {
-        platform: data.platform
+
+    const removeListeners = () => {
+        updateNowButton.removeEventListener('click', handleUpdateNow);
+        updateLaterButton.removeEventListener('click', handleUpdateLater);
+    };
+
+    updateNowButton.addEventListener('click', handleUpdateNow);
+    updateLaterButton.addEventListener('click', handleUpdateLater);
+}
+
+// Modifica o registro do Service Worker para incluir a lógica de atualização
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js?v=3').then(function(registration) {
+      console.log('ServiceWorker registrado com sucesso:', registration.scope);
+
+      // Escutar por atualizações
+      registration.addEventListener('updatefound', () => {
+        const newWorker = registration.installing;
+        newWorker.addEventListener('statechange', () => {
+          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+            // Um novo Service Worker foi instalado e está esperando
+            promptForUpdate(registration);
+          }
+        });
       });
-    }
-    
-    // Fallback usando Beacon API
-    if (navigator.sendBeacon) {
-      const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
-      navigator.sendBeacon('/api/analytics', blob);
-    }
-  }
-  
-  // ====================== POLYFILLS ======================
-  // Garante compatibilidade com navegadores antigos
-  if (!Node.prototype.insertAdjacentHTML) {
-    Node.prototype.insertAdjacentHTML = function(position, text) {
-      const div = document.createElement('div');
-      div.innerHTML = text;
-      
-      switch (position.toLowerCase()) {
-        case 'beforebegin':
-          this.parentNode.insertBefore(div.firstChild, this);
-          break;
-        case 'afterbegin':
-          this.insertBefore(div.firstChild, this.firstChild);
-          break;
-        case 'beforeend':
-          this.appendChild(div.firstChild);
-          break;
-        case 'afterend':
-          this.parentNode.insertBefore(div.firstChild, this.nextSibling);
-          break;
+
+      // Se já houver um Service Worker em espera (ex: o usuário não aceitou a atualização na primeira vez)
+      if (registration.waiting) {
+        promptForUpdate(registration);
       }
-    };
-  }
+
+    }, function(err) {
+      console.log('Falha ao registrar o ServiceWorker:', err);
+    });
+  });
+}

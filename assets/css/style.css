@@ -1,6 +1,6 @@
 /* Estilos aprimorados para o Portal do Aluno Vicente Rijo */
 :root {
-    --pr-blue: #1400a9;
+    --pr-blue: #ffb90f;
     --pr-green: #3D8B37;
     --white: #FFFFFF;
     --gray-light: #F5F5F5;
@@ -8,7 +8,22 @@
     --text-dark: #333333;
     --red-heart: #FF0000;
     --yelow_vr: #f1c40f;
-    --bg-light: linear-gradient(135deg, #003366 0%, #0055a5 100%);
+    --bg-light: linear-gradient(135deg, #011427 0%, #011527 100%);
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s;
+    --header-bg: rgba(1, 20, 35, 0.95);
+    --footer-bg: rgba(1, 20, 35, 0.95);
+}
+
+/* Dark mode - As cores e estilos definidos aqui sobrescrevem os do tema claro quando [data-theme="dark"] está ativo */
+[data-theme="dark"] {
+    --card-bg: #2C2C2C;
+    --text-dark: #FFFFFF;
+    --gray-light: #1A1A1A;
+    --card-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    --header-bg: #1A1A1A;
+    --footer-bg: #1A1A1A;
 }
 
 * {
@@ -23,25 +38,24 @@ body {
     color: var(--text-dark);
     font-family: 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
+    line-height: 1.6;
 }
 
-/* Efeito Parallax */
+html, body {
+    overflow-x: hidden;
+    width: 100vw;
+    max-width: 100vw;
+}
 
-/*.parallax-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: url('/assets/images/logos/paralax.webp') no-repeat center center/cover;
-    z-index: -1;
-}*/
 .container {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     position: relative;
     z-index: 1;
+    width: 100vw;
+    max-width: 100vw;
+    box-sizing: border-box;
 }
 
 .header {
@@ -49,77 +63,89 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background: rgba(0, 34, 62, 0.8);
+    background: var(--header-bg);
     color: var(--white);
-    border-radius: 5px;
+    border-radius: 0;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
-.logo-title-container {
+.header-main {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    text-align: center;
+    gap: 1.5rem;
     margin-bottom: 1rem;
 }
 
-.school-logo {
-    height: 100px;
-    /* Tamanho padrão para desktop */
+.logo {
+    max-height: 70px;
     width: auto;
-    transition: transform 0.3s ease;
+    display: block;
 }
 
-.school-logo:hover {
-    transform: scale(1.05);
+.header-title-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.title {
+h1 {
     font-size: 2.5rem;
     color: var(--white);
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     margin: 0;
     line-height: 1.2;
+    font-weight: 700;
 }
 
-.title span {
-    display: block;
-    font-weight: 300;
-    font-size: 0.8em;
+.school-name {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 0.2rem;
 }
 
-/* BARRA DE BUSCA - ESTILOS GERAIS */
-.search-container {
+.header-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 500px;
     width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
-  
-  .search-form {
+    margin: 1rem auto 0 auto;
+}
+
+.search-form {
+    flex: 1;
     display: flex;
     width: 100%;
     border-radius: 50px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    background: white;
-    border: 1px solid #ddd; /* Borda sutil para melhor definição */
-  }
-  
-  .search-input {
+    box-shadow: var(--card-shadow);
+    background: var(--card-bg);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.search-form:focus-within {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.search-input {
     flex: 1;
     padding: 0.8rem 1.2rem;
     border: none;
     font-size: 1rem;
     min-width: 0;
     outline: none;
-    height: 44px; /* Altura fixa para alinhamento */
-  }
-  
-  /* BOTÃO DE BUSCA - ESTILO PADRÃO */
-  .search-button {
+    height: 44px;
+    background: transparent;
+    color: var(--text-dark);
+}
+
+/* BOTÃO DE BUSCA - ESTILO PADRÃO */
+.search-button {
     background-color: var(--pr-blue);
     border: none;
     padding: 0 1.5rem;
@@ -127,119 +153,169 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
-    height: 44px; /* Mesma altura do input */
-    border-left: 1px solid rgba(255,255,255,0.2); /* Divisor sutil */
-  }
+    transition: all var(--transition-speed) ease;
+    height: 44px;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
 
 .search-button:hover {
     background-color: var(--pr-green);
+    transform: scale(1.05);
+}
 
+.search-button:active {
+    transform: scale(0.95);
 }
 
 .search-button img {
     width: 20px;
     height: 20px;
-    filter: brightness(0) invert(1); /* Ícone branco */
-  }
+    filter: brightness(0) invert(1);
+    transition: transform var(--transition-speed) ease;
+}
+
+.search-button:hover img {
+    transform: scale(1.1);
+}
 
 .main-content {
     flex: 1;
     padding: 2rem;
-
 }
 
 .section-title {
     text-align: center;
-    margin-bottom: 1.5rem;
-    color: rgba(0, 34, 62, 0.8);
+    margin-bottom: 2rem;
+    color: var(--text-dark);
     font-size: 2rem;
     font-weight: bold;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
 
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--pr-blue);
+    border-radius: 2px;
 }
 
 .platforms-section {
-    background-color: bl;
+    background-color: transparent;
 }
 
 .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
     padding: 0 1rem;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow-x: visible;
 }
 
 .card {
-    background: rgba(190, 190, 193, 0.9);
-    border-radius: 10px;
+    background: var(--card-bg);
+    border-radius: 15px;
     padding: 1.5rem 1rem;
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
+    transition: all var(--transition-speed) ease;
+    box-shadow: var(--card-shadow);
     cursor: pointer;
     position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: var(--text-dark);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.card:hover::before {
+    transform: translateX(100%);
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.02);
     box-shadow: 0 10px 20px rgba(0, 92, 169, 0.3);
-    background: rgba(0, 34, 62, 0.8);
-    color: var(--white);
-}
-
-.card:hover h3,
-.card:hover p {
+    background: var(--bg-light);
     color: var(--white);
 }
 
 .card-logo {
-    width: 90px;
-    height: 90px;
+    width: 80px;
+    height: 80px;
     object-fit: contain;
-
+    margin-bottom: 0.5rem;
 }
 
 .card-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: rgba(0, 34, 62, 0.8);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
 }
 
+.card-description {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
 
+.card-link {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-indent: -9999px;
+    z-index: 1;
+    outline: none;
+}
 
 .footer {
-    background-color: rgba(0, 34, 62, 0.8);
-    color: var(--white);
     text-align: center;
-    padding: 1rem;
-    margin-top: 0.5rem;
+    padding: 20px;
+    background: var(--footer-bg);
+    color: var(--white);
+    margin-top: auto;
+    border-radius: 5px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* LINKS NO FOOTER */
-.footer a {
+.footer-copy {
+    font-size: 0.95rem;
+    color: var(--gray-medium);
+    margin-top: 0.2rem;
+}
+
+.footer-copy a {
+    color: var(--gray-medium);
     text-decoration: none;
-    /* Remove sublinhado */
-    transition: color 0.3s ease;
-    font-weight: bold;
-    /* Negrito */
-    color: var(--white);
-    /* Ou outra cor do seu tema */
-    opacity: 0.9;
 }
 
-.footer a:hover {
-    color: var(--white);
-    /* Cor ao passar o mouse (opcional) */
-    text-decoration: underline;
-    /* Sublinhado apenas no hover (opcional) */
-    opacity: 1;
+.footer-copy a:hover {
     text-decoration: underline;
 }
 
-/* Remove o sublinhado extra do elemento <u> */
-.footer a u {
-    text-decoration: none;
+.footer-copy a:visited {
+    color: var(--gray-medium);
 }
 
 .heart {
@@ -253,11 +329,9 @@ body {
     0% {
         transform: scale(1);
     }
-
     50% {
-        transform: scale(1.3);
+        transform: scale(1.2);
     }
-
     100% {
         transform: scale(1);
     }
@@ -265,204 +339,511 @@ body {
 
 /* =========== DESKTOP STYLES (min-width: 769px) =========== */
 @media (min-width: 769px) {
-    /* ----- BARRA DE BUSCA ----- */
-    .search-container {
-      width: 80%;
-      max-width: 600px;
-      padding: 0;
+    .header-main {
+        gap: 2rem;
     }
-  
-    .search-form {
-      border: 1px solid #e0e0e0;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    .logo {
+        max-height: 100px;
     }
-  
-    .search-input {
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
+    h1 {
+        font-size: 3rem;
     }
-  
-    .search-button {
-      padding: 0 1.5rem;
-      background-color: var(--pr-blue);
-      border-left: 1px solid rgba(255, 255, 255, 0.2);
+    .school-name {
+        font-size: 2rem;
+        margin-top: 0.1rem;
     }
-  
-    .search-button:hover {
-      background-color: #004a8a;
+    .header-controls {
+        margin-top: 1.5rem;
     }
-  
-    .search-button img {
-      width: 18px;
-      height: 18px;
-    }
-  
-    /* ----- HEADER (Logo + Título) ----- */
-    .logo-title-container {
-      flex-direction: row;
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-  
-    .school-logo {
-      height: 100px;
-    }
-  
-    .title {
-      font-size: 2.5rem;
-    }
-  
-    /* ----- CARDS ----- */
     .cards-grid {
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1.5rem;
-      padding: 0;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 2rem;
+      padding: 0 2rem;
     }
   
     .card {
-      padding: 1.5rem;
-      transition: transform 0.3s, box-shadow 0.3s;
+      padding: 2rem;
     }
   
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 92, 169, 0.15);
-    }
-  
-    /* ----- FOOTER ----- */
     .footer {
-      padding: 1.5rem;
+      padding: 2rem;
     }
-  
-    .footer a {
-      color: var(--white);
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s;
-    }
-  
-    .footer a:hover {
-      border-bottom: 1px solid var(--white);
-    }
-  }
-
-  
+}
 
 /* =========== MOBILE STYLES =========== */
 
 /* ----------- TABLET (max-width: 768px) ----------- */
 @media (max-width: 768px) {
-    /* ----- GERAL ----- */
-    .container {
-      padding: 0 1rem;
-    }
-  
-    /* ----- HEADER ----- */
-    .logo-title-container {
-      flex-direction: column;
-      gap: 0.5rem;
-      text-align: center;
-    }
-  
-    .school-logo {
-      height: 80px;
-    }
-  
-    .title {
-      font-size: 2rem;
-      line-height: 1.2;
-    }
-  
-    /* ----- BARRA DE BUSCA ----- */
-    .search-container {
-      width: 100%;
-      padding: 0 0.5rem;
-    }
-  
-    .search-form {
-      border-radius: 25px;
-    }
-  
-    .search-input {
-      padding: 0.9rem 1.2rem;
-      height: 48px;
-    }
-  
-    .search-button {
-      min-width: 55px;
-      height: 48px;
-    }
-  
-    /* ----- CARDS ----- */
-    .cards-grid {
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 1rem;
-      padding: 0 0.5rem;
-    }
-  
-    .card {
-      padding: 1.2rem 0.8rem;
-    }
-  }
-  
-  /* ----------- CELULAR (max-width: 480px) ----------- */
-  @media (max-width: 480px) {
-    /* ----- HEADER ----- */
     .header {
-      padding: 1rem 0;
+        padding: 15px 0;
     }
-  
-    .school-logo {
-      height: 70px;
+    .header-main {
+        gap: 1rem;
+        margin-bottom: 0.8rem;
     }
-  
-    .title {
-      font-size: 1.7rem;
+    .logo {
+        max-height: 65px;
     }
-  
-    /* ----- BARRA DE BUSCA ----- */
-    .search-input {
-      padding: 0.8rem 1rem;
-      font-size: 0.95rem;
+    h1 {
+        font-size: 2.2rem;
     }
-  
-    .search-button {
-      min-width: 50px;
-      padding: 0 0.8rem;
+    .school-name {
+        font-size: 1.1rem;
     }
-  
-    /* ----- CARDS ----- */
-    .cards-grid {
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 0.8rem;
+    .header-controls {
+        margin-top: 0.8rem;
+        padding: 0 0.5rem;
     }
-  
-    .card-title {
-      font-size: 0.95rem;
-    }
-  
-    /* ----- FOOTER ----- */
     .footer {
-      padding: 1rem;
+        padding: 15px 0;
     }
-  
-    .footer p {
-      font-size: 0.9rem;
+    .container {
+        /* Removido padding lateral para cabeçalho e rodapé ocuparem 100% */
     }
-  }
-  
-  /* ----------- CELULAR PEQUENO (max-width: 360px) ----------- */
-  @media (max-width: 360px) {
-    .title {
-      font-size: 1.5rem;
+    .main-content {
+        padding: 1rem 15px; /* Adiciona padding horizontal ao conteúdo principal */
     }
-  
     .cards-grid {
-      grid-template-columns: 1fr 1fr;
+        padding: 0 0.5rem;
     }
-  
-    .card-logo {
-      width: 60px;
-      height: 60px;
+}
+
+/* ----------- CELULAR (max-width: 480px) ----------- */
+@media (max-width: 480px) {
+    .header {
+        padding: 15px;
+        align-items: center;
     }
-  }
+    .header-main {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+        margin-bottom: 0.8rem;
+    }
+    .logo {
+        max-height: 55px;
+        margin-bottom: 0.5rem;
+    }
+    h1 {
+        font-size: 1.6rem;
+        line-height: 1.1;
+    }
+    .school-name {
+        font-size: 0.8rem;
+        margin-top: 0;
+    }
+    .header-controls {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+        margin: 0.8rem auto 0 auto;
+        gap: 10px;
+        align-items: center;
+    }
+    .search-form {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+    #toggle-theme, #install-button {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+    }
+    #toggle-theme {
+        margin-bottom: 0.5rem;
+        z-index: 9999;
+    }
+    #toggle-theme:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    .main-content {
+        padding: 1rem 15px;
+    }
+    .cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+        padding: 0 10px;
+    }
+    .footer {
+        padding: 10px 15px;
+        text-align: center;
+    }
+    .footer-copy {
+        word-break: break-word;
+        font-size: 0.85rem;
+    }
+    .footer-copy a {
+        word-break: break-word;
+    }
+    /* A regra de ocultação do indicador de status da rede foi movida para o CSS global e é controlada por JS */
+}
+
+/* Acessibilidade - Foco visível universal */
+:focus {
+    outline: none; /* Remove a outline padrão para todos os elementos */
+    box-shadow: none; /* Remove qualquer box-shadow padrão ao focar */
+    /* Se precisar de um foco visual para outros elementos, adicione regras mais específicas para eles */
+}
+
+/* Estilos para o tema escuro (aplicados quando data-theme="dark") */
+[data-theme="dark"] body {
+    background-color: var(--gray-light);
+    color: var(--text-dark);
+}
+[data-theme="dark"] .header, [data-theme="dark"] .footer {
+    background: var(--header-bg);
+    color: var(--text-dark);
+}
+[data-theme="dark"] .card {
+    background: var(--card-bg);
+    color: var(--text-dark);
+    border: 1.5px solid #444444;
+    box-shadow: var(--card-shadow);
+}
+[data-theme="dark"] .card .card-title,
+[data-theme="dark"] .card .card-description {
+    color: #fff;
+}
+[data-theme="dark"] .card:hover, [data-theme="dark"] .card:focus-within {
+    background: #3A3A3A;
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    border-color: #4285f4;
+}
+[data-theme="dark"] .card-link {
+    color: #90caf9;
+}
+[data-theme="dark"] .card-link:hover, [data-theme="dark"] .card-link:focus {
+    color: #fff;
+    text-decoration: underline;
+}
+[data-theme="dark"] .footer, [data-theme="dark"] .footer-copy {
+    color: #bbb;
+}
+[data-theme="dark"] .search-form {
+    background: var(--card-bg);
+    border-color: #555;
+}
+[data-theme="dark"] .search-input {
+    background: var(--card-bg);
+    color: var(--text-dark);
+}
+[data-theme="dark"] .search-input::placeholder {
+    color: #aaa;
+}
+[data-theme="dark"] .search-button {
+    background-color: var(--card-bg);
+}
+[data-theme="dark"] .search-button:hover {
+    background-color: #4285f4;
+}
+[data-theme="dark"] .section-title {
+    color: #FFFFFF;
+}
+
+/* Melhora o contraste no modo escuro */
+[data-theme="dark"] .header {
+    background: #1A1A1A;
+}
+[data-theme="dark"] .header-main .logo {
+    filter: brightness(0.9) invert(0.1);
+}
+[data-theme="dark"] .header-main h1, [data-theme="dark"] .header-main .school-name {
+    color: #FFFFFF;
+}
+
+/* Melhora o contraste no modo escuro para o subtítulo */
+[data-theme="dark"] .subtitle {
+    color: rgba(255, 255, 255, 0.98);
+}
+
+/* Botão de alternância de tema no header */
+#toggle-theme {
+    margin-left: 0;
+    font-size: 1.7rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    vertical-align: middle;
+    color: #ffd600;
+    transition: filter 0.2s;
+    outline: 0 !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent;
+    flex-shrink: 0;
+    z-index: 9999;
+}
+#toggle-theme:focus {
+    filter: none;
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
+@media (max-width: 768px) {
+    #toggle-theme {
+        margin-left: 0.5rem;
+        font-size: 2rem;
+    }
+}
+
+/* Estilos para o link 'Prof Bruno Carvalho' no rodapé */
+.footer p a {
+    color: var(--white) !important;
+    text-decoration: none;
+    position: relative;
+    padding: 0 2px;
+    transition: all 0.3s ease;
+}
+
+.footer p a:visited {
+    color: var(--white) !important;
+}
+
+.footer p a:hover {
+    color: var(--pr-blue) !important;
+    transform: translateY(-2px);
+}
+
+.footer p a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--pr-blue);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.footer p a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Dark mode para o link do rodapé */
+[data-theme="dark"] .footer p a:hover {
+    color: var(--yelow_vr) !important;
+}
+
+[data-theme="dark"] .footer p a::after {
+    background-color: var(--yelow_vr);
+}
+
+/* Estilos para o indicador de status da rede */
+#network-status-indicator {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    color: var(--white);
+    font-size: 0.9rem;
+    font-weight: normal;
+    line-height: 1;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    display: none; /* Começa oculto, o JS controla a visibilidade */
+    align-items: center;
+    justify-content: center;
+}
+
+#network-status-indicator:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.network-status-online {
+    background-color: #28a745;
+}
+
+.network-status-offline {
+    background-color: #dc3545;
+}
+
+/* Estilos para o botão de instalação (PWA) */
+#install-button {
+    background-color: transparent;
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    display: none; /* Começa oculto, o JS controla a visibilidade */
+}
+
+#install-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--white);
+    transform: translateY(-2px);
+}
+
+#install-button:active {
+    transform: translateY(0);
+}
+
+/* Dark mode para o botão de instalação */
+[data-theme="dark"] #install-button {
+    color: var(--text-dark);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] #install-button:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: var(--text-dark);
+}
+
+/* ========================================= */
+/* Estilos para o Modal de Atualização (PWA) */
+/* ========================================= */
+.update-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000; /* Acima de todos os outros elementos */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.update-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.update-modal-container {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 90%;
+    width: 450px;
+    box-shadow: var(--card-shadow);
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.update-modal-overlay.active .update-modal-container {
+    transform: translateY(0);
+}
+
+.update-modal-title {
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.update-modal-message {
+    font-size: 1rem;
+    color: var(--text-dark);
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+.update-modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.update-modal-button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    min-width: 150px;
+}
+
+.update-modal-button.primary {
+    background: var(--pr-blue);
+    color: var(--white);
+}
+
+.update-modal-button.primary:hover {
+    background: var(--pr-green);
+    transform: translateY(-2px);
+}
+
+.update-modal-button.primary:active {
+    transform: translateY(0);
+}
+
+.update-modal-button.secondary {
+    background: var(--gray-medium);
+    color: var(--text-dark);
+}
+
+.update-modal-button.secondary:hover {
+    background: #c5c5c5;
+    transform: translateY(-2px);
+}
+
+.update-modal-button.secondary:active {
+    transform: translateY(0);
+}
+
+/* Dark mode para o modal */
+[data-theme="dark"] .update-modal-container {
+    background: #2C2C2C;
+    border: 1px solid #444444;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+[data-theme="dark"] .update-modal-title,
+[data-theme="dark"] .update-modal-message {
+    color: #FFFFFF;
+}
+[data-theme="dark"] .update-modal-button.secondary {
+    background: #555555;
+    color: #FFFFFF;
+}
+[data-theme="dark"] .update-modal-button.secondary:hover {
+    background: #666666;
+}
+
+/* Responsividade do modal */
+@media (max-width: 480px) {
+    .update-modal-container {
+        padding: 1.5rem;
+        width: 95%;
+    }
+    .update-modal-title {
+        font-size: 1.5rem;
+    }
+    .update-modal-message {
+        font-size: 0.9rem;
+    }
+    .update-modal-buttons {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    .update-modal-button {
+        width: 100%;
+        min-width: unset;
+    }
+}
