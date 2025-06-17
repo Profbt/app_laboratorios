@@ -8,14 +8,6 @@
     --text-dark: #333333;
     --red-heart: #FF0000;
     --bg-light: linear-gradient(135deg, #003366 0%, #0055a5 100%);
-    --red-heart: #DC3545;
-    --yelow_vr: #f1c40f;
-    --bg-light: linear-gradient(135deg, #011427 0%, #011527 100%);
-    --card-bg: rgba(255, 255, 255, 0.95);
-    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --transition-speed: 0.3s;
-    --header-bg: rgba(1, 20, 35, 0.95);
-    --footer-bg: rgba(1, 20, 35, 0.95);
 }
 
 * {
@@ -179,51 +171,11 @@ body {
 
 
 .footer {
-    text-align: center;
-    padding: 20px;
-    background: var(--footer-bg);
+    background-color: rgba(0, 34, 62, 0.8);;
     color: var(--white);
-    margin-top: auto;
-    border-radius: 5px;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.footer-copy {
-    font-size: 0.95rem;
-    color: var(--gray-medium);
-    margin-top: 0.2rem;
-}
-
-.footer-copy a {
-    color: var(--gray-medium);
-    text-decoration: none;
-}
-
-.footer-copy a:hover {
-    text-decoration: underline;
-}
-
-.footer-copy a:visited {
-    color: var(--gray-medium);
-}
-
-.heart {
-    color: var(--red-heart);
-    font-size: 1.2em;
-    animation: pulse 1.5s infinite;
-    display: inline-block;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-    100% {
-        transform: scale(1);
-    }
+    text-align: center;
+    padding: 1rem;
+    margin-top: 0.5rem;
 }
 
 .heart {
